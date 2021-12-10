@@ -23,7 +23,7 @@
                 'currency': '{{shop.currency}}',
                 'add': {
                   'actionField': {'list': productCat+" Page "+productCatPage},
-                  'products': [{                        
+                  'items': [{                        
                     'name': '{{ product.title }}',
                     'id': '{{ product.id }}',
                     'price': '{{ product.price | money_without_currency | replace:',','.' }}',
@@ -97,7 +97,7 @@
             'ecommerce': {
               'click': {
                 'actionField': {'list': productCat+" Page "+productCatPage}, //Will be set at the backend
-                'products': [{
+                'items': [{
                   'name': "{{product.title}}",          //Product Name            
                   'id': "{{product.id}}", //Product ID
                   'price':'{{ product.price | money_without_currency | replace:',','.' }}', //Product price
@@ -157,7 +157,7 @@
             'ecommerce': {
               'click': {
                 'actionField': {'list': productCat+" Page "+productCatPage}, //Will be set at the backend
-                'products': [{
+                'items': [{
                   'name': "{{product.title}}",          //Product Name            
                   'id': "{{product.id}}", //Product ID
                   'price':'{{ product.price | money_without_currency | replace:',','.' }}', //Product price
@@ -227,7 +227,7 @@
             'ecommerce': {
               'click': {
                 'actionField': {'list': productCat+" Page "+productCatPage}, //Will be set at the backend
-                'products': [{
+                'items': [{
                   'name': "{{product.title}}",          //Product Name            
                   'id': "{{product.id}}", //Product ID
                   'price':'{{ product.price | money_without_currency | replace:',','.' }}', //Product price
@@ -271,7 +271,7 @@ $(document).on("click", "a", function(){
             'ecommerce': {
               'click': {
                 'actionField': {'list': 'Shop'}, //Will be set at the backend
-                'products': [{
+                'items': [{
                   'name': "{{product.title}}",          //Product Name            
                   'id': "{{product.id}}", //Product ID
                   'price':'{{ product.price | money_without_currency | replace:',','.' }}', //Product price
@@ -311,7 +311,7 @@ $(document).on("click", "a", function(){
         'ecommerce': {
           'detail': {
             'actionField': {'list': productCat+" Page "+productCatPage},
-            'products': [{
+            'items': [{
               'name': '{{ product.title }}',                    
               'id': '{{ product.id }}',
               'price':'{{ product.price | money_without_currency | replace:',','.' }}',
@@ -343,7 +343,7 @@ $(document).on("click", "a", function(){
                 'currency': '{{shop.currency}}',
                 'remove': {  
                   'actionField': {'list': productCat+" Page "+productCatPage},
-                  'products': [{                        
+                  'items': [{                        
                     'name': '{{ product.title }}',
                     'id': '{{ product.id }}',
                     'price': '{{ product.price | money_without_currency | replace:',','.' }}',
@@ -362,7 +362,7 @@ $(document).on("click", "a", function(){
                 'currency': '{{shop.currency}}',
                 'add': {
                   'actionField': {'list': productCat+" Page "+productCatPage},
-                  'products': [{                        
+                  'items': [{                        
                     'name': '{{ product.title }}',
                     'id': '{{ product.id }}',
                     'price': '{{ product.price | money_without_currency | replace:',','.' }}',
@@ -395,7 +395,7 @@ $(document).on("click", "a", function(){
         'currency': '{{shop.currency}}',
         'checkout': {
           'actionField': {'list': productCat+" Page "+productCatPage},
-          'products': [{% for itm in cart.items %}
+          'items': [{% for itm in cart.items %}
             {          
             'name': '{{ itm.product.title }}',
             'id': '{{ itm.product.id }}',
@@ -427,7 +427,7 @@ $(document).on("click", "a", function(){
         'currency': '{{shop.currency}}',
         'remove': {  
           'actionField': {'list': productCat+" Page "+productCatPage},
-          'products': [{                        
+          'items': [{                        
             'name': '{{ item.product.title }}',
             'id': '{{ item.product.id }}',
             'price': '{{ item.original_line_price | money_without_currency | replace:',','.' | replace:'<span class=money>','' }}',
@@ -487,7 +487,7 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
                   'currency': '{{shop.currency}}',
                   'remove': {  
                     'actionField': {'list': productCat+" Page "+productCatPage},
-                    'products': [{                        
+                    'items': [{                        
                       'name': '{{ item.product.title }}',
                       'id': '{{ item.product.id }}',
                       'price': '{{ item.original_line_price | money_without_currency | replace:',','.' | replace:'<span class=money>','' }}',
@@ -529,7 +529,7 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
                 'currency': '{{shop.currency}}',
                 'remove': {  
                   'actionField': {'list': productCat+" Page "+productCatPage},
-                  'products': [{                        
+                  'items': [{                        
                     'name': '{{ product.title }}',
                     'id': '{{ product.id }}',
                     'price': '{{ product.price | money_without_currency | replace:',','.' }}',
@@ -548,7 +548,7 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
                 'currency': '{{shop.currency}}',
                 'add': {
                   'actionField': {'list': productCat+" Page "+productCatPage},
-                  'products': [{                        
+                  'items': [{                        
                     'name': '{{ product.title }}',
                     'id': '{{ product.id }}',
                     'price': '{{ product.price | money_without_currency | replace:',','.' }}',
@@ -582,7 +582,7 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
         'currency': '{{shop.currency}}',
         'checkout': {
           'actionField': {'list': productCat+" Page "+productCatPage},
-          'products': [{% for item in cart.items %}
+          'items': [{% for item in cart.items %}
             {          
             'name': '{{ item.product.title }}',
             'id': '{{ item.product.id }}',
