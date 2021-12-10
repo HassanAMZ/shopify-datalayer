@@ -21,9 +21,7 @@
               'event': 'add_to_cart',
               'ecommerce': {
                 'currency': '{{shop.currency}}',
-                'add': {
-                  'actionField': {'list': productCat+" Page "+productCatPage},
-                  'items': [{                        
+                'items': [{                        
                     'name': '{{ product.title }}',
                     'id': '{{ product.id }}',
                     'price': '{{ product.price | money_without_currency | replace:',','.' }}',
@@ -32,8 +30,7 @@
                     'variant': '{{product.selected_or_first_available_variant.id}}',
                     'quantity': 1,
                     'position': sessionStorage.productNumber
-                   }]
-                }
+                }]
               }
             });
   }
@@ -360,9 +357,7 @@ $(document).on("click", "a", function(){
               'event': 'add_to_cart',
               'ecommerce': {
                 'currency': '{{shop.currency}}',
-                'add': {
-                  'actionField': {'list': productCat+" Page "+productCatPage},
-                  'items': [{                        
+                'items': [{                        
                     'name': '{{ product.title }}',
                     'id': '{{ product.id }}',
                     'price': '{{ product.price | money_without_currency | replace:',','.' }}',
@@ -371,8 +366,7 @@ $(document).on("click", "a", function(){
                     'variant': '{{product.selected_or_first_available_variant.id}}',
                     'quantity': 1,
                     'position': sessionStorage.productNumber
-                   }]
-                }
+                }]
               }
             });
  
@@ -546,9 +540,7 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
               'event': 'add_to_cart',
               'ecommerce': {
                 'currency': '{{shop.currency}}',
-                'add': {
-                  'actionField': {'list': productCat+" Page "+productCatPage},
-                  'items': [{                        
+                'items': [{                        
                     'name': '{{ product.title }}',
                     'id': '{{ product.id }}',
                     'price': '{{ product.price | money_without_currency | replace:',','.' }}',
@@ -557,8 +549,7 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
                     'variant': '{{product.selected_or_first_available_variant.id}}',
                     'quantity': 1,
                     'position': sessionStorage.productNumber
-                   }]
-                }
+                }]
               }
             });
  
