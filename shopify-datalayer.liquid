@@ -354,22 +354,21 @@ dataLayer.push({
     var productCatPage = 1;
     }
     dataLayer.push({
-    'event': 'checkout',
+    'event': 'custom_begin_checkout',
     'ecommerce': {
-    'currency': '{{shop.currency}}',
-    'checkout': {
-        'actionField': {'list': productCat+" Page "+productCatPage},
+        'currency': '{{shop.currency}}',
         'items': [{% for itm in cart.items %}
-        {          
-        'name': '{{ itm.product.title }}',
-        'id': '{{ itm.product.id }}',
-        'price': '{{ itm.original_line_price | money_without_currency | replace:',','.' | replace:'<span class=money>','' }}',
-            'brand': '{{shop.name}}',
-            'category':productCat,
-        'variant': '{{product.selected_or_first_available_variant.id}}',
-        'quantity': {{ itm.quantity }}
-        },{% endfor %}]
-    }
+            {          
+            'name': '{{ itm.product.title }}',
+            'id': '{{ itm.product.id }}',
+            'price': '{{ itm.original_line_price | money_without_currency | replace:',','.' | replace:'<span class=money>','' }}',
+                'brand': '{{shop.name}}',
+                'category':productCat,
+            'variant': '{{product.selected_or_first_available_variant.id}}',
+            'quantity': {{ itm.quantity }}
+            },{% endfor %}
+        ]
+    
     }
 })});
 
@@ -538,22 +537,20 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
     }
     //alert("Check out button clicked");
         dataLayer.push({
-    'event': 'checkout',
+    'event': 'custom_begin_checkout',
     'ecommerce': {
-    'currency': '{{shop.currency}}',
-    'checkout': {
-        'actionField': {'list': productCat+" Page "+productCatPage},
+        'currency': '{{shop.currency}}',
         'items': [{% for item in cart.items %}
-        {          
-        'name': '{{ item.product.title }}',
-        'id': '{{ item.product.id }}',
-        'price': '{{ item.original_line_price | money_without_currency | replace:',','.' | replace:'<span class=money>','' }}',
-        'brand': '{{shop.name}}',
-        'category': productCat,
-        'variant': '{{product.selected_or_first_available_variant.id}}',
-        'quantity': {{ item.quantity }}
-        },{% endfor %}]
-    }
+            {          
+            'name': '{{ item.product.title }}',
+            'id': '{{ item.product.id }}',
+            'price': '{{ item.original_line_price | money_without_currency | replace:',','.' | replace:'<span class=money>','' }}',
+            'brand': '{{shop.name}}',
+            'category': productCat,
+            'variant': '{{product.selected_or_first_available_variant.id}}',
+            'quantity': {{ item.quantity }}
+            },{% endfor %}]
+    
     }
 })
     }
