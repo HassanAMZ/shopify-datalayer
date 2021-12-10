@@ -7,6 +7,7 @@
 
 <script>
 function atc(){
+dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
 dataLayer.push({
             'event': 'custom_add_to_cart',
             'ecommerce': {
@@ -41,6 +42,7 @@ console.log("dsf");
 sessionStorage.setItem("productCategory", "{{collection.title}}");
 sessionStorage.setItem("productCategoryPage", "{{current_page}}");
 if({{current_page}}>1){
+    dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
     dataLayer.push({
     'event': 'custom_view_item_list',
     'ecommerce': {
@@ -76,6 +78,7 @@ if({{current_page}}>1){
     console.log("{{product.url | within: collection}}");
     if(product_uri==a_tag){
         sessionStorage.setItem("productNumber", {{ forloop.index }}+12*({{current_page}}-1));
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
         dataLayer.push({
         'event': 'custom_select_item',
         'ecommerce': {
@@ -98,6 +101,7 @@ if({{current_page}}>1){
 
 }
     else{
+    dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
     dataLayer.push({
         'event': 'custom_view_item_list',
         'ecommerce': {
@@ -132,6 +136,7 @@ if({{current_page}}>1){
     console.log("{{product.url | within: collection}}");
     if(product_uri==a_tag){
         sessionStorage.setItem("productNumber", {{ forloop.index }});
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
         dataLayer.push({
         'event': 'custom_select_item',
         'ecommerce': {
@@ -164,6 +169,7 @@ if({{current_page}}>1){
 
 sessionStorage.setItem("productCategory", "{{collection.title}}");
 sessionStorage.setItem("productCategoryPage", "{{current_page}}");
+dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
 dataLayer.push({
     'event': 'custom_view_item_list',
     'ecommerce': {
@@ -199,6 +205,7 @@ dataLayer.push({
     console.log("{{product.url | within: collection}}");
     if(product_uri==a_tag){
         sessionStorage.setItem("productNumber", {{ forloop.index }});
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
         dataLayer.push({
         'event': 'custom_select_item',
         'ecommerce': {
@@ -240,6 +247,7 @@ $(document).on("click", "a", function(){
     var product_uri = "/products/shop";
     if(product_uri==a_tag){
         sessionStorage.setItem("productNumber", 1);
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
         dataLayer.push({
         'event': 'custom_select_item',
         'ecommerce': {
@@ -278,6 +286,7 @@ var cartItems = [];
     var productCat = "{{product.collections[0].title}}";
     var productCatPage = 1;
     }
+dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
 dataLayer.push({
     'event': 'custom_view_item',
     'ecommerce': {
@@ -305,7 +314,7 @@ dataLayer.push({
     }
 
     cartItems.push({
-            'event': 'removeFromCart',
+            'event': 'custom_remove_from_cart',
             'ecommerce': {
             'currency': '{{shop.currency}}',
             'remove': {  
@@ -323,6 +332,7 @@ dataLayer.push({
             }
             }
         })
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
         dataLayer.push({
             'event': 'custom_add_to_cart',
             'ecommerce': {
@@ -353,6 +363,7 @@ dataLayer.push({
     var productCat = "{{cart.items[0].collections[0].title}}";
     var productCatPage = 1;
     }
+    dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
     dataLayer.push({
     'event': 'custom_begin_checkout',
     'ecommerce': {
@@ -385,7 +396,7 @@ dataLayer.push({
     {% for item in cart.items %}
 {% assign collection = collections.last-minute-checkout-items' %}  
     cartItems.push({
-    'event': 'removeFromCart',
+    'event': 'custom_remove_from_cart',
     'ecommerce': {
     'currency': '{{shop.currency}}',
     'remove': {  
@@ -444,12 +455,11 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
         //alert(a_tag);
         if((a_tag.includes(remove_cart_link1)) ||(a_tag.includes(remove_cart_link2)) ||(a_tag.includes(remove_cart_link3)) ){
             //alert("a","remove from cart");
+            dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
             dataLayer.push({
-            'event': 'removeFromCart',
+            'event': 'custom_remove_from_cart',
             'ecommerce': {
                 'currency': '{{shop.currency}}',
-                'remove': {  
-                'actionField': {'list': productCat+" Page "+productCatPage},
                 'items': [{                        
                     'name': '{{ item.product.title }}',
                     'id': '{{ item.product.id }}',
@@ -461,7 +471,7 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
                     'position': sessionStorage.productNumber
                     }]
                 }
-            }
+            
             })
         }
 
@@ -487,11 +497,9 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
     if(formAction == '{{routes.cart_add_url}}'){
     //alert("add to cart button clicked");
     cartItems.push({
-            'event': 'removeFromCart',
+            'event': 'custom_remove_from_cart',
             'ecommerce': {
             'currency': '{{shop.currency}}',
-            'remove': {  
-                'actionField': {'list': productCat+" Page "+productCatPage},
                 'items': [{                        
                 'name': '{{ product.title }}',
                 'id': '{{ product.id }}',
@@ -502,9 +510,10 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
                 'quantity': 1,
                 'position': sessionStorage.productNumber
                 }]
-            }
+            
             }
         })
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
         dataLayer.push({
             'event': 'custom_add_to_cart',
             'ecommerce': {
@@ -536,7 +545,8 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
     var productCatPage = 1;
     }
     //alert("Check out button clicked");
-        dataLayer.push({
+    dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+    dataLayer.push({
     'event': 'custom_begin_checkout',
     'ecommerce': {
         'currency': '{{shop.currency}}',
