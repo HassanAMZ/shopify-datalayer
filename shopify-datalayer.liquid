@@ -302,7 +302,7 @@ $(document).on("click", "a", function(){
               'price':'{{ product.price | money_without_currency | replace:',','.' }}',
               'brand': '{{shop.name}}',
               'category': productCat,
-             'variant': '{{product.selected_or_first_available_variant.id}}',
+              'variant': '{{product.selected_or_first_available_variant.id}}',
               'position': sessionStorage.productNumber
              }]
          },
