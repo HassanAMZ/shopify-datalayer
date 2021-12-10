@@ -2,23 +2,13 @@
       var dataLayer=[{'event':'userid',
                     'userId': '{{ customer.id }}'
                     }];
- 
     </script>
  
- 
-    <!--Container-->
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WN6FZMF');
-    </script>
-    <!-- End Google Tag Manager -->
+
 <script>
   function atc(){
   dataLayer.push({
-              'event': 'add_to_cart',
+              'event': 'custom_add_to_cart',
               'ecommerce': {
                 'currency': '{{shop.currency}}',
                 'items': [{                        
@@ -304,10 +294,8 @@ $(document).on("click", "a", function(){
       var productCatPage = 1;
       }
     dataLayer.push({
-        'event': 'productdetail',
+        'event': 'custom_view_item',
         'ecommerce': {
-          'detail': {
-            'actionField': {'list': productCat+" Page "+productCatPage},
             'items': [{
               'name': '{{ product.title }}',                    
               'id': '{{ product.id }}',
@@ -316,11 +304,8 @@ $(document).on("click", "a", function(){
               'category': productCat,
              'variant': '{{product.selected_or_first_available_variant.id}}',
               'position': sessionStorage.productNumber
- 
              }]
-           }
          },
- 
       });
  
     {% endif %}
@@ -354,7 +339,7 @@ $(document).on("click", "a", function(){
               }
             })
             dataLayer.push({
-              'event': 'add_to_cart',
+              'event': 'custom_add_to_cart',
               'ecommerce': {
                 'currency': '{{shop.currency}}',
                 'items': [{                        
@@ -537,7 +522,7 @@ var remove_cart_link3 = "{{ routes.cart_change_url }}?quantity=0&line={{ forloop
               }
             })
             dataLayer.push({
-              'event': 'add_to_cart',
+              'event': 'custom_add_to_cart',
               'ecommerce': {
                 'currency': '{{shop.currency}}',
                 'items': [{                        
