@@ -77,10 +77,8 @@ if({{current_page}}>1){
     if(product_uri==a_tag){
         sessionStorage.setItem("productNumber", {{ forloop.index }}+12*({{current_page}}-1));
         dataLayer.push({
-        'event': 'productClick',
+        'event': 'custom_select_item',
         'ecommerce': {
-            'click': {
-            'actionField': {'list': productCat+" Page "+productCatPage}, //Will be set at the backend
             'items': [{
                 'name': "{{product.title}}",          //Product Name            
                 'id': "{{product.id}}", //Product ID
@@ -90,7 +88,7 @@ if({{current_page}}>1){
                 'variant': '{{product.selected_or_first_available_variant.id}}', //Will be set at the backend
                 'position': {{ forloop.index }}+12*({{current_page}}-1) //Product position
                 }]
-            }
+            
             },
 
         });
@@ -135,10 +133,8 @@ if({{current_page}}>1){
     if(product_uri==a_tag){
         sessionStorage.setItem("productNumber", {{ forloop.index }});
         dataLayer.push({
-        'event': 'productClick',
+        'event': 'custom_select_item',
         'ecommerce': {
-            'click': {
-            'actionField': {'list': productCat+" Page "+productCatPage}, //Will be set at the backend
             'items': [{
                 'name': "{{product.title}}",          //Product Name            
                 'id': "{{product.id}}", //Product ID
@@ -148,7 +144,7 @@ if({{current_page}}>1){
                 'variant': '{{product.selected_or_first_available_variant.id}}', //Will be set at the backend
                 'position': {{ forloop.index }} //Product position
                 }]
-            }
+            
             },
 
         });
@@ -204,11 +200,9 @@ dataLayer.push({
     if(product_uri==a_tag){
         sessionStorage.setItem("productNumber", {{ forloop.index }});
         dataLayer.push({
-        'event': 'productClick',
+        'event': 'custom_select_item',
         'ecommerce': {
-            'click': {
-            'actionField': {'list': productCat+" Page "+productCatPage}, //Will be set at the backend
-            'items': [{
+           'items': [{
                 'name': "{{product.title}}",          //Product Name            
                 'id': "{{product.id}}", //Product ID
                 'price':'{{ product.price | money_without_currency | replace:',','.' }}', //Product price
@@ -217,7 +211,6 @@ dataLayer.push({
                 'variant': '{{product.selected_or_first_available_variant.id}}', //Will be set at the backend
                 'position': {{ forloop.index }} //Product position
                 }]
-            }
             },
 
         });
@@ -248,10 +241,8 @@ $(document).on("click", "a", function(){
     if(product_uri==a_tag){
         sessionStorage.setItem("productNumber", 1);
         dataLayer.push({
-        'event': 'productClick',
+        'event': 'custom_select_item',
         'ecommerce': {
-            'click': {
-            'actionField': {'list': 'Shop'}, //Will be set at the backend
             'items': [{
                 'name': "{{product.title}}",          //Product Name            
                 'id': "{{product.id}}", //Product ID
@@ -261,7 +252,7 @@ $(document).on("click", "a", function(){
                 'variant': '{{product.selected_or_first_available_variant.id}}', //Will be set at the backend
                 'position': 1 //Product position
                 }]
-            }
+           
             },
 
         });
