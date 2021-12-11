@@ -5,27 +5,7 @@
 </script>
 
 
-<script>
-function atc(){
-dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
-dataLayer.push({
-            'event': 'custom_add_to_cart',
-            'ecommerce': {
-            'currency': '{{shop.currency}}',
-            'items': [{                        
-                'name': '{{ product.title }}',
-                'id': '{{ product.id }}',
-                'price': '{{ product.price | money_without_currency | replace:',','.' }}',
-                'brand': '{{shop.name}}',
-                'category': productCat,
-                'variant': '{{product.selected_or_first_available_variant.id}}',
-                'quantity': 1,
-                'position': sessionStorage.productNumber
-            }]
-            }
-        });
-}
-</script>
+
 
 {%- if request.page_type == "collection" -%}
 {%- paginate collection.products by 12 -%}
@@ -293,6 +273,7 @@ dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
 dataLayer.push({
     'event': 'custom_view_item',
     'ecommerce': {
+        'currency': '{{shop.currency}}',
         'items': [{
             'name': '{{ product.title }}',                    
             'id': '{{ product.id }}',
@@ -306,7 +287,7 @@ dataLayer.push({
     });
 
 {% endif %}
-    $(document).on("click", ".ProductForm__AddToCart", function(){
+    $(document).on("click", ".product-form__cart-submit", function(){
     if(typeof sessionStorage.productCategory !== 'undefined'){
     var productCat = sessionStorage.productCategory;
     var productCatPage = sessionStorage.productCategoryPage;
@@ -355,7 +336,7 @@ dataLayer.push({
 
 
     });
-    $(document).on("click", ".Cart__Checkout", function(){
+    $(document).on("click", ".cart__submit", function(){
     var productCat;
     var productCatPage;
     if(typeof sessionStorage.productCategory !== 'undefined'){
