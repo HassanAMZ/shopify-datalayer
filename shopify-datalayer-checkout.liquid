@@ -1,129 +1,39 @@
 {% if first_time_accessed %}
 <script>
-var productCat;
-var productCatPage;
-var cookie_string = document.cookie;
-var date = Shopify.checkout["updated_at"];
-var currentDate = new Date();
- 
-var currentDayOfMonth = currentDate.getDate();
-var currentMonth = currentDate.getMonth()+1; // Be careful! January is 0, not 1
-var currentYear = currentDate.getFullYear();
-if(currentMonth.toString().length==1){
-currentMonth = "0"+currentMonth
-}
-if(currentDayOfMonth.toString().length==1){
-currentDayOfMonth = "0"+currentDayOfMonth
-}
-var dateString = currentYear + "-" + currentMonth + "-" +currentDayOfMonth ;
-var cookie_string = document.cookie;
+
 if(!Shopify.checkout.discount==true){
-	coupon_code='';
- 
+	var coupon_code='';
 }
 else {
-	coupon_code=Shopify.checkout.discount.code;
+var	coupon_code=Shopify.checkout.discount.code;
 }
-var order_name = document.getElementsByClassName("os-order-number")[0].innerText.split("Order ")[1];
-if((date.includes(dateString)==true) & (typeof sessionStorage.productCategory !== 'undefined') & (cookie_string.includes("orderId="+Shopify.checkout.order_id)== false)){
-    var d = new Date();
-    d.setTime(d.getTime() + (365*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = "orderId="+Shopify.checkout.order_id+";"+expires;
-    var productCat = sessionStorage.productCategory;
-    var productCatPage = sessionStorage.productCategoryPage;
-    dataLayer=[{'event':'userid',
-				'userId': Shopify.checkout.customer_id
-				}];    
- 
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-XXXXX');
-//alert(Shopify.checkout.customer_id);
-console.log(Shopify.checkout.line_items);
 var product_line_items = [];
 var i;
 for (i = 0; i <  Shopify.checkout.line_items.length; i++) {
         console.log(Shopify.checkout.line_items[i].title);
-	  product_line_items .push({
+	  	product_line_items .push({
         'name': Shopify.checkout.line_items[i].title,    
         'id': Shopify.checkout.line_items[i].product_id,		
         'price': Shopify.checkout.line_items[i].price,	
         'brand': Shopify.checkout.line_items[i].vendor,	
         'variant': Shopify.checkout.line_items[i].variant_id,
-	    'category': productCat,	
         'quantity': Shopify.checkout.line_items[i].quantity     
-       })
-		};
-//console.log(product_line_items );
+    })
+};
+
+
 dataLayer.push({
   'event': 'custom_purchase',
   'ecommerce': {  
-        'transaction_id': order_name ,
-        'value':  Shopify.checkout.total_price,  
-	    'shipping': Shopify.checkout.shipping_rate.price,
-        'list':  productCat+" Page "+productCatPage,
-	    'tax':Shopify.checkout.total_tax,
+        'transaction_id': {{ order_number }} ,
+        'value':  {{ checkout.subtotal_price | divided_by: 100.0 }},  
+	    'shipping': {{ order.shipping_price | divided_by: 100.0 }}, 
+	    'tax': {{ order.tax_price | divided_by: 100.0 }}, 
 	    'coupon':coupon_code,
-        'currency': '{{shop.currency}}',    
+        'currency': '{{ currency }}',    
         'items':product_line_items 
-      }}});
-  sessionStorage.setItem("orderId",Shopify.checkout.order_id);
- 
-  }
-  else {
-  var productCat = "direct";
-  var productCatPage = "URL";
-  if((date.includes(dateString)==true) & (cookie_string.includes("orderId="+Shopify.checkout.order_id)== false)){
-	dataLayer=[{'event':'userid',
-		    'userId': Shopify.checkout.customer_id
-			}];    
-	(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-XXXXX');
-	//alert(Shopify.checkout.customer_id);
-	console.log(Shopify.checkout.line_items);
-	var product_line_items = [];
-	var i;
-	for (i = 0; i <  Shopify.checkout.line_items.length; i++) {
-        	console.log(Shopify.checkout.line_items[i].title);
-	  	product_line_items .push({
-        	'name': Shopify.checkout.line_items[i].title,    
-        	'id': Shopify.checkout.line_items[i].product_id,		
-        	'price': Shopify.checkout.line_items[i].price,	
-        	'brand': Shopify.checkout.line_items[i].vendor,	
-       		'variant': Shopify.checkout.line_items[i].variant_id,
-            'category': productCat,
-        	'quantity': Shopify.checkout.line_items[i].quantity     
-      		 })
-			};
-		console.log(product_line_items );
-	dataLayer.push({
- 	'event': 'custom_purchase',
-       'userDetails':{
-                'first_name': Shopify.checkout.billing_address.first_name,
-                'last_name':  Shopify.checkout.billing_address.last_name,
-                'email':Shopify.checkout.email
-},
-  	'ecommerce': {
-        	'transaction_id': order_name ,
-        	'value':  Shopify.checkout.total_price,  
-	    	'shipping': Shopify.checkout.shipping_rate.price,
-            'list':  productCat+" Page "+productCatPage,
-            'tax':Shopify.checkout.total_tax,
-	        'coupon':coupon_code,
-         	'items':product_line_items 
-	}});
-	sessionStorage.setItem("orderId",Shopify.checkout.order_id);
-	var d = new Date();
-  	d.setTime(d.getTime() + (365*24*60*60*1000));
-  	var expires = "expires="+ d.toUTCString();
-  	document.cookie = "orderId="+Shopify.checkout.order_id+";"+expires;
-	}
-  }
+      }
+	});
+  
 </script>
  {% endif %}
