@@ -7,33 +7,37 @@ if(!Shopify.checkout.discount==true){
 else {
 var	coupon_code=Shopify.checkout.discount.code;
 }
+
 var product_line_items = [];
 var i;
+
 for (i = 0; i <  Shopify.checkout.line_items.length; i++) {
-        console.log(Shopify.checkout.line_items[i].title);
+      console.log(Shopify.checkout.line_items[i].title);
 	  	product_line_items .push({
-        'name': Shopify.checkout.line_items[i].title,    
-        'id': Shopify.checkout.line_items[i].product_id,		
-        'price': Shopify.checkout.line_items[i].price,	
-        'brand': Shopify.checkout.line_items[i].vendor,	
-        'variant': Shopify.checkout.line_items[i].variant_id,
-        'quantity': Shopify.checkout.line_items[i].quantity     
-    })
+      'name': Shopify.checkout.line_items[i].title,    
+      'id': Shopify.checkout.line_items[i].product_id,		
+      'price': Shopify.checkout.line_items[i].price,	
+      'brand': Shopify.checkout.line_items[i].vendor,	
+      'variant': Shopify.checkout.line_items[i].variant_id,
+      'quantity': Shopify.checkout.line_items[i].quantity     
+    }
+  )
 };
 
 
 dataLayer.push({
   'event': 'custom_purchase',
   'ecommerce': {  
-        'transaction_id': {{ order_number }} ,
-        'value':  {{ checkout.subtotal_price | divided_by: 100.0 }},  
+      'transaction_id': {{ order_number }} ,
+      'value':  {{ checkout.subtotal_price | divided_by: 100.0 }},  
 	    'shipping': {{ order.shipping_price | divided_by: 100.0 }}, 
 	    'tax': {{ order.tax_price | divided_by: 100.0 }}, 
 	    'coupon':coupon_code,
-        'currency': '{{ currency }}',    
-        'items':product_line_items 
-      }
-	});
+      'currency': '{{ currency }}',    
+      'items':product_line_items 
+    }
+});
   
 </script>
- {% endif %}
+
+{% endif %}
