@@ -1,3 +1,23 @@
+<script>
+dataLayer.push({
+'event': "customerInfo"
+	'user_data':{
+		'id' : {{customer.id | json}},
+		'email_address' : {{customer.email | json}},
+		'first_name'   : {{customer_address.first_name | json}},
+		'last_name'    : {{customer_address.last_name | json}},
+		'city'        : {{customer_address.city | json}},
+		'region'    : {{customer_address.province | json}},
+		'postal_code'         : {{customer_address.zip | json}},
+		'country'     : {{customer_address.country | json}},
+		'phone_number'       : {{customer_address.phone | json}}
+	}
+})
+</script>
+            
+
+
+
 {% if first_time_accessed %}
 <script>
 
