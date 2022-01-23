@@ -35,9 +35,20 @@ dataLayer.push({
 	    'coupon':coupon_code,
       'currency': '{{ currency }}',    
       'items':product_line_items 
-    }
+    },
+   'user_data':{
+	'id' : Shopify.checkout.billing_address.id,
+	'email_address' : Shopify.checkout.email,
+	'address':{
+		'first_name'   : Shopify.checkout.billing_address.first_name,
+		'last_name'    : Shopify.checkout.billing_address.last_name,
+		'city'        : Shopify.checkout.billing_address.city,
+		'region'    : Shopify.checkout.billing_address.province,
+		'postal_code'         : Shopify.checkout.billing_address.zip,
+		'country'     : Shopify.checkout.billing_address.country,
+		'phone_number'       : Shopify.checkout.billing_address.phone,
+	}}
 });
   
 </script>
-
 {% endif %}
