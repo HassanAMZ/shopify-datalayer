@@ -1,0 +1,36 @@
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                                                        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://matrics-au.tuski.co/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                            })(window,document,'script','dataLayer','GTM-5464GVR');</script>
+<!-- End Google Tag Manager -->
+<script>
+(function() {
+  // make sure the initial conversion isn't tracked twice
+  {% if first_time_accessed == false || post_purchase_page_accessed == true %}
+    return;
+  {% endif %}
+  // set up google analytics
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  // track initial conversion
+  var order = window.Shopify.order;
+  gtag('event', 'purchase', {
+    affiliation: 'My Shopify Store',
+    transaction_id: Number(order.id).toString(),
+    value: order.totalPrice,
+    currency: order.currency,
+    items: order.lineItems.map((item) => ({
+      id: Number(item.id).toString(),
+      name: item.title,
+      category: item.product.type,
+      price: item.price,
+      quantity: item.quantity,
+      variant: Number(item.variant.sku).toString(),
+    })),
+  });
+})();
+</script>
