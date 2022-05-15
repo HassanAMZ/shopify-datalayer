@@ -3,7 +3,6 @@
     dataLayer.push({
         'event': 'custom_purchase',
         'ecommerce': {
-
             'timestamp': Shopify.checkout.created_at,
             'transaction_id': {{ order_number }} ,
             'value': {{ checkout.subtotal_price | divided_by: 100.0 }},
@@ -13,7 +12,6 @@
             'currency': '{{ currency }}',
             'discount_detials': Shopify.checkout.discount,
             'items': Shopify.checkout.line_items.map((product_line_item, index) => {
-
                 return item = {
                     'item_id': product_line_item.product_id,
                     'item_sku': product_line_item.sku,
