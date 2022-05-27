@@ -1,5 +1,9 @@
 {% if first_time_accessed %}
 <script>
+window.dataLayer = window.dataLayer || [];
+</script>
+<script>
+    dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
     dataLayer.push({
         'event': 'custom_purchase',
         'ecommerce': {
@@ -27,8 +31,19 @@
                 }
             })
         },
-        'user_data': Shopify.checkout.billing_address
+   'user_data': {
+      user_id: Shopify.checkout.billing_address.id,
+      email_address: Shopify.checkout.email,
+      phone_number: Shopify.checkout.billing_address.phone,
+      address: {
+        first_name: Shopify.checkout.billing_address.first_name,
+        last_name: Shopify.checkout.billing_address.last_name,
+        city: Shopify.checkout.billing_address.city,
+        region: Shopify.checkout.billing_address.province,
+        postal_code: Shopify.checkout.billing_address.zip,
+        country: Shopify.checkout.billing_address.country,
+      }
     }
-);
+  });
 </script>
 {% endif %}
