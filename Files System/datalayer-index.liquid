@@ -1,0 +1,37 @@
+<script>
+	window.dataLayer = window.dataLayer || [];
+	window.addEventListener('load', () => {
+		var items = document.querySelectorAll('[data-product-item]');
+
+		items.forEach((item, i) => {
+				const info = JSON.parse(item.dataset.productInfo);
+				const {
+					id, price, title, type, vendor, collTitle,
+				} = info;
+
+				const itemPrice = price / 100;
+
+				item.addEventListener('click', (e) => {
+					dataLayer.push({ ecommerce: null });
+					dataLayer.push({
+						event: 'select_item',
+						ecommerce: {
+							items: [
+							{
+								item_id: id,
+								item_name: title,
+								currency: theme.currency,
+								index: i,
+								item_brand: vendor,
+								item_category: type,
+								item_list_name: collTitle,
+								price: itemPrice,
+								quantity: 1,
+							},
+							],
+						},
+					});
+				});
+			});
+	});
+</script>

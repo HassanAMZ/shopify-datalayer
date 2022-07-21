@@ -1,0 +1,41 @@
+{%- liquid
+	assign current_variant = product.selected_or_first_available_variant
+-%}
+
+<script>
+	// Item object
+	var itemObject = {
+		item_id: {{ current_variant.id | json }},
+		item_name: {{ product.title | json }},
+		currency: {{ shop.currency | json }},
+		item_brand: {{ product.vendor | json }},
+		item_category: {{ product.type | json }},
+		item_variant: {{ current_variant.title | json }},
+		price: {{ current_variant.price }} / 100,
+		quantity: 1
+	}
+
+	document.addEventListener('DOMContentLoaded', () => {
+		// View item
+		dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		dataLayer.push({
+			event: "view_item",
+			ecommerce: {
+				items: [itemObject]
+			}
+		});
+
+		// Add to cart
+		const addToCartBtn = document.querySelector('[data-submit-btn]')
+		addToCartBtn?.addEventListener('click', () => {
+			dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+			dataLayer.push({
+				event: "add_to_cart",
+				ecommerce: {
+					items: [itemObject]
+				}
+			});
+		})
+	})
+
+</script>

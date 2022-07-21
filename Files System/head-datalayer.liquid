@@ -1,0 +1,15 @@
+<script>
+	window.dataLayer = window.dataLayer || [];
+</script>
+
+{%- if template == 'index' -%}
+	{%- render 'datalayer-index' -%}
+{%- endif -%}
+
+{%- if template == 'product' -%}
+	{%- render 'datalayer-product', product: product -%}
+{%- endif -%}
+
+{%- if template == 'collection' -%}
+	{%- render 'datalayer-collection', collection: collection -%}
+{%- endif -%}
